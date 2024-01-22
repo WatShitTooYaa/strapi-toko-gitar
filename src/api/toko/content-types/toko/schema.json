@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tokos",
+  "info": {
+    "singularName": "toko",
+    "pluralName": "tokos",
+    "displayName": "toko",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nama": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "whatsapp": {
+      "type": "string"
+    },
+    "gambar_toko": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "images": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::image.image",
+      "mappedBy": "tokos"
+    },
+    "alamat_toko": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "string"
+    }
+  }
+}

@@ -780,9 +780,19 @@ export interface ApiImageImage extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    gitar: Attribute.Media;
+    alat: Attribute.Media;
     nama: Attribute.String;
     harga: Attribute.String;
+    tokos: Attribute.Relation<
+      'api::image.image',
+      'manyToMany',
+      'api::toko.toko'
+    >;
+    tests: Attribute.Relation<
+      'api::image.image',
+      'manyToMany',
+      'api::test.test'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -834,6 +844,69 @@ export interface ApiLoginLogin extends Schema.CollectionType {
   };
 }
 
+export interface ApiTestTest extends Schema.CollectionType {
+  collectionName: 'tests';
+  info: {
+    singularName: 'test';
+    pluralName: 'tests';
+    displayName: 'test';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nama: Attribute.String;
+    umur: Attribute.String;
+    images: Attribute.Relation<
+      'api::test.test',
+      'manyToMany',
+      'api::image.image'
+    >;
+    tes_gambar: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTokoToko extends Schema.CollectionType {
+  collectionName: 'tokos';
+  info: {
+    singularName: 'toko';
+    pluralName: 'tokos';
+    displayName: 'toko';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nama: Attribute.String;
+    email: Attribute.String;
+    whatsapp: Attribute.String;
+    gambar_toko: Attribute.Media;
+    images: Attribute.Relation<
+      'api::toko.toko',
+      'manyToMany',
+      'api::image.image'
+    >;
+    alamat_toko: Attribute.String;
+    rating: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::toko.toko', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::toko.toko', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -854,6 +927,8 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::image.image': ApiImageImage;
       'api::login.login': ApiLoginLogin;
+      'api::test.test': ApiTestTest;
+      'api::toko.toko': ApiTokoToko;
     }
   }
 }

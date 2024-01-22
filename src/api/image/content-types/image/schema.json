@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "gitar": {
+    "alat": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -28,6 +28,18 @@
     },
     "harga": {
       "type": "string"
+    },
+    "tokos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::toko.toko",
+      "inversedBy": "images"
+    },
+    "tests": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::test.test",
+      "mappedBy": "images"
     }
   }
 }
